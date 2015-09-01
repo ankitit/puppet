@@ -1,5 +1,5 @@
 class dispatcher::files (
-$dir = '/home/sysadmin',
+$dir = '/etc/apache2/dispatcher',
 ){
 file { '/tmp/dispatcher.any':
 	content => template('dispatcher/dispatcher.any.erb'),
@@ -8,15 +8,14 @@ file { '/tmp/dispatcher.any':
         group => 'root',
         mode => '0755',
 }
-#file { "${dir}/dispatcher.any":
-#        ensure => file,
-#        owner  => root,
-#        group  => root,
-#	 require
-#    }
 exec { 'mv':
 	path => ['/usr/bin', '/usr/sbin', '/bin'],
 	command => "mv /tmp/dispatcher.any ${dir}",
 	require => File['/tmp/dispatcher.any'],
+}
+exec { 'dispatcher_dir':
+   path => ['/usr/bin', '/usr/sbin', '/bin'],
+  command => "mkdir -p ${dir}",
+  creates => "${dir}",
 }
 }
