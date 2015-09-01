@@ -10,12 +10,12 @@ file { '/tmp/dispatcher.any':
 }
 exec { 'mv':
 	path => ['/usr/bin', '/usr/sbin', '/bin'],
-	command => "mv /tmp/dispatcher.any ${dir}",
+	command => "mkdir -p ${dir} && mv /tmp/dispatcher.any ${dir}",
 	require => File['/tmp/dispatcher.any'],
 }
-exec { 'dispatcher_dir':
-   path => ['/usr/bin', '/usr/sbin', '/bin'],
-  command => "mkdir -p ${dir}",
-  creates => "${dir}",
-}
+#exec { 'dispatcher_dir':
+#   path => ['/usr/bin', '/usr/sbin', '/bin'],
+#  command => "mkdir -p ${dir}",
+#  creates => "${dir}",
+#}
 }
