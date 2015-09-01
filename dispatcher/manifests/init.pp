@@ -39,4 +39,6 @@ class dispatcher (
 $maindir = '/home/sysadmin',
 ) {
 include dispatcher::files
+include dispatcher::apache2
 }
+
