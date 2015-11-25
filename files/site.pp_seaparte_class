@@ -1,0 +1,4 @@
+node 'puppetagent2.example.com'{
+import 'classes/*'
+}
+#include motd.pp

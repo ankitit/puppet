@@ -1,0 +1,24 @@
+#include test::script
+#class { 'java':
+ # distribution => 'jre',
+#}
+#class { 'test':
+#message => 'publish',
+#port => '4503',
+#}
+#class { 'test::script':
+#message => 'author',
+#port => '4502',
+#}
+######################################
+class { 'java':
+  distribution => 'jre',
+}
+class { 'aem::author':
+message => author,   #specify the type of AEM installation to create.Only author/publisher valid
+port => 7502,           #specify the port on which AEM will listen.
+}
+class { 'aem::publish':
+message => publish,   #specify the type of AEM installation to create.Only author/publisher valid
+port => 7503,           #specify the port on which AEM will listen.
+}

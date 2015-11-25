@@ -1,0 +1,38 @@
+case $operatingsystem {
+    ubuntu: {
+	notify {'apt-get installation':
+	require => Exec['apt-update'],
+}
+	exec { 'apt-update':                    
+  	command => '/usr/bin/apt-get update',  
+  }
+         package { 'nginx':
+          ensure => 'present',
+ #require => Exec['apt-update'],        
+before=>Notify['apt-get installation'],
+}
+	service { 'nginx':
+        ensure => 'running',
+        enable => 'true',
+      }
+    }
+    centos: {
+exec { 'yum':
+        command => '/usr/bin/yum update',
+  }
+package { 'epel-release':
+  ensure => 'installed',
+}
+package { 'epel-release':
+  ensure => 'installed',
+}
+       package { 'nginx':
+	ensure => 'present',
+	require => [Exec['yum'], Package['epel-release']],
+    }
+	service { 'nginx':
+        ensure => 'running',
+        enable => 'true',
+}
+}
+}

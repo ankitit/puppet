@@ -1,0 +1,14 @@
+ec2_instance { 'Created-puppet-agent':
+  ensure              => 'present',
+  availability_zone   => 'us-east-1a',
+  image_id            => 'ami-091e726c',
+  instance_type       => 't2.small',
+  key_name            => 'Mongo',
+  region              => 'us-east-1',
+  security_groups     => ['launch-wizard-16'],
+}
+class {'testingapache2':
+	port => '8080',
+	documentRoot => '/var/www/html/testing',
+}
+

@@ -1,0 +1,9 @@
+file {'authorized_keys':
+ensure => present,
+path => '/home/ubuntu/.ssh/authorized_keys',
+source => 'puppet:///files/authorized_keys',
+owner => 'ubuntu',
+group => 'ubuntu',
+mode => '400'
+}
+
